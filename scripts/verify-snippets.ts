@@ -300,11 +300,10 @@ try {
     files.set(path, snippet.prefix);
   }
 
-  const tsc = join(REPO_ROOT, 'node_modules', '.bin', process.platform === 'win32' ? 'tsc.cmd' : 'tsc');
-  const result = spawnSync(tsc, ['-p', 'tsconfig.json', '--pretty', 'false'], {
+  const tscJs = join(REPO_ROOT, 'node_modules', 'typescript', 'bin', 'tsc');
+  const result = spawnSync(process.execPath, [tscJs, '-p', 'tsconfig.json', '--pretty', 'false'], {
     cwd: projectDir,
     encoding: 'utf8',
-    shell: process.platform === 'win32',
   });
   if (result.error) throw result.error;
 
